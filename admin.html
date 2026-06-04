@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel - Hoor Studio</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
 
+    .box {
+      max-width: 400px;
+      margin: auto;
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      border: none;
+      background: gold;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #panel {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box" id="loginBox">
+  <h2>Admin Login</h2>
+  <input type="password" id="pass" placeholder="Enter Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="box" id="panel">
+  <h2>Edit Website</h2>
+
+  <label>Website Title</label>
+  <input type="text" id="title">
+
+  <label>Hero Text</label>
+  <textarea id="hero"></textarea>
+
+  <label>Image URL</label>
+  <input type="text" id="img">
+
+  <button onclick="saveData()">Save Changes</button>
+</div>
+
+<script>
+const PASSWORD = "1234"; // change this
+
+function login() {
+  let p = document.getElementById("pass").value;
+
+  if (p === PASSWORD) {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("panel").style.display = "block";
+    loadData();
+  } else {
+    alert("Wrong Password!");
+  }
+}
+
+function saveData() {
+  localStorage.setItem("title", document.getElementById("title").value);
+  localStorage.setItem("hero", document.getElementById("hero").value);
+  localStorage.setItem("img", document.getElementById("img").value);
+
+  alert("Saved! Now update your homepage code.");
+}
+
+function loadData() {
+  document.getElementById("title").value = localStorage.getItem("title") || "";
+  document.getElementById("hero").value = localStorage.getItem("hero") || "";
+  document.getElementById("img").value = localStorage.getItem("img") || "";
+}
+</script>
+
+</body>
+</html>
